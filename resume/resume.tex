@@ -97,12 +97,15 @@ Author and maintainer. Published on PyPI.
 Times and cross-checks GPU ensemble ODE solvers (Cubie, Diffrax, torchdiffeq,
 MPGOS, DiffEqGPU.jl) on identical problems.
 
-\subsection{Compiler PRs: numba-cuda-mlir, numba-cuda}
+\subsection{Compiler PRs: numba-cuda(-mlir)}
 \begin{itemize}
-  \item \texttt{cuda.unroll} / \texttt{cuda.nounroll} loop unroll hints
-  \item Merged: compiler front-end speed-ups (dominators, CFG ordering,
-        liveness) and AST transform repair
-  \item Merged: race condition fix in the numba-cuda simulator
+  \item Compiler performance improvements (6 merged, 3 open)
+  \item Lowering/typing correctness (6 merged, 3 open)
+  \item Kernel performance controls (3 open)
+  \item AST transforms (1 merged, 1 open)
+  \item Runtime fixes, LLVM interface, compiled code annotation
+        (2 merged, 2 open)
+  \item CPU simulator race condition (1 merged)
 \end{itemize}
 
 \subsection{SymPy and lcapy}
