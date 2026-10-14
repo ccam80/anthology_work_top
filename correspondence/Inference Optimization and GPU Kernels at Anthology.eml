@@ -1,0 +1,162 @@
+Delivered-To: chrisjamescameron1@gmail.com
+Received: by 2002:a17:907:1983:b0:c36:4de8:777e with SMTP id li3csp718090ejc;
+        Wed, 14 Oct 2026 11:30:48 -0700 (PDT)
+X-Received: by 2002:ad4:5ce1:0:b0:91b:8ee1:221e with SMTP id 6a1803df08f44-91b8ee12dc1mr167475496d6.20.1792002648092;
+        Wed, 14 Oct 2026 11:30:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792002648; cv=none;
+        d=google.com; s=arc-20260327;
+        b=J/RPjGoyLY6a5Kd4QHzY2f4Y95V6b7CDkhRrdVBgBZXS9CLuGAIt2MLRmifPaxg/nL
+         oIB2VZ7XD7Pz0bU6uT9cXYRQIpHaWqm7aUCyd1svv/nK3xmO4/9/wLC36HVuzd4jhRMA
+         nV9j3OcTJMWo+N/FREhuEi2U6b3dPjWggxv/2o0VhshOOeVK2l3djlS5NWdR95GxK8WJ
+         8+DiJlmd+TrKDXNlwft6OR2rKljZEvlxkqztjbxekt9SN55b+Zx9oNfeIT4I27tOmoyH
+         V7MS7k19qZ7zbgP1J6KoixH10r24kDwv6pCwdwyB/Den8q3jMZ2SujnMlt6qE79TN79X
+         SRbw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=mime-version:date:subject:to:from:list-unsubscribe-post
+         :list-unsubscribe:message-id:dkim-signature;
+        bh=xofM/GoN26Rxri/gnV6aYEm08Hfjs6917XaoJyKlWQ4=;
+        fh=yyqcm6516kqAVs0xJ9MnF3zZJngzK+/4+BYUB6iyoAA=;
+        b=TavDBYc9LolR3Ieq5+6CDeLYSEJLk6DzyCC0Hkuvh260PlQV6ckGKxgL0pCrHwUC3d
+         Gwgu8IkL1GBLhSYZJpCBQEEXRsKCeU4kxfNz1CdY7og+A1or3sIhIFiB9jBu4KmOMOkU
+         0SSSpmgq/d6uMnbT1E3Q3R9tIyK9ve1yqrzEha1O16hKEE/bgDDi/LVi89zVxhZ3pWgi
+         szzfk3ZZwblPD11pE34XnfCdAf+oThZLiBRsGRWSigTGOcq/mOTuho6pXpAZpEdqmyE+
+         ATJrY9GR0dIGCArLezN4YByb3ng6gPCGziECzYXDIYOV9QYgOCB+MA44Bv/qUYTZQtOD
+         77bQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@anthologyintelligence.com header.s=google header.b="lcx3/HyU";
+       spf=pass (google.com: domain of rohan@anthologyintelligence.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=rohan@anthologyintelligence.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=anthologyintelligence.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <rohan@anthologyintelligence.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 6a1803df08f44-91ba7f82a74sor43956056d6.5.2026.10.14.11.30.47
+        for <chrisjamescameron1@gmail.com>
+        (Google Transport Security);
+        Wed, 14 Oct 2026 11:30:48 -0700 (PDT)
+Received-SPF: pass (google.com: domain of rohan@anthologyintelligence.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@anthologyintelligence.com header.s=google header.b="lcx3/HyU";
+       spf=pass (google.com: domain of rohan@anthologyintelligence.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=rohan@anthologyintelligence.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=anthologyintelligence.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=anthologyintelligence.com; s=google; t=1792002647; x=1792607447; dara=google.com;
+        h=content-type:mime-version:date:subject:to:from
+         :list-unsubscribe-post:list-unsubscribe:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=xofM/GoN26Rxri/gnV6aYEm08Hfjs6917XaoJyKlWQ4=;
+        b=lcx3/HyUkftqK49AClG78T3ZzYV4aKoNG9GaUak5q3tu9+FEm6HC1IQwlBCzhU6OAC
+         1iM+tg9HPC4M9ybPLcaybbE5fdd5sAb5XqQ1h5JgaqfNP5lGVkzC2Fc239RR0Z24Tglp
+         RXLjmpdIMgEpl5lk21EtZ+jbjoLxWPRYktLO5X+RjjQRo1beVa3wGYXxAl0cTRx1rgv1
+         6oxeYuBMuZRBnWLAe5h85yeuChI0EUI9+Wf0FOaS9QFxef95GFctzrvucwcijnAHrqwA
+         JqAIh8djgXCecCmX+edTjDbfGrITECKUMQL7i+3Wk06LB+wyLc61k++J5lgz3Nw8RK8Z
+         TS5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792002647; x=1792607447;
+        h=content-type:mime-version:date:subject:to:from
+         :list-unsubscribe-post:list-unsubscribe:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=xofM/GoN26Rxri/gnV6aYEm08Hfjs6917XaoJyKlWQ4=;
+        b=0OpIoH2vGqE+/UDMJxnemsR8f1EVVS3QMN7ui/TGq8sjzq/HfkgHMmqBZ+wx+mYj03
+         uFYDuFaEH7mHmJZCXa524rQD4YhrBRpFynqs5A9Bi7rGcOtdtQ2/pZ6GD6JJGlb+v+Xo
+         EYw0/IYSaqC2Lyrc6EjmAS2tLicP8UGx4TgwutdtwRwuTj64Ax0aupCAEqdqpuhrXEdJ
+         y2RgIrpF4bJDOxI2dFiq9wLCkAnrVR8KpTfg3FyrR0y9Z4RBMgOwx5mSOZ5wXYO3/fyo
+         vpom7r1A/O7SI8P8yA9gyiQJzN6yzR4030YeTSn+YIvEqzH78jRhGleRniWL7K9O3dh0
+         vsMA==
+X-Gm-Message-State: AFq9FYLMwlEUYPK8usF4FmgisSzDIMstyAhmlLDoOBqBwgD8bJsql2zw
+	bs+Le6a6sIDD4u5nRNoHCHL3kspcUubNcL8DwiWVSJSDxknbQoYKbrB81zLscg7atw8LJ/kaoQE
+	c5w3k/mro
+X-Gm-Gg: AYBFou3eHauafMWfZRgmob13Zj5Z1PH8dKNNhZkpjglTEaPKkuN0gOCF4W9a/HEnwwE
+	lBcw7CCKH6dOAf/xisK0JqW7KMODWz7h3bjdIdHRufwB+IZUv9n7LI56dHcFS3Two9hEtI4QtGt
+	yI4SUxEP85yBbGLRNEqqS6p2N2gcTIPfKHtooC3vdW3h6i9lCqx1R9tR0/8C5mjCfNDScKALXJK
+	SCkG1Qz/TsOmvTi3/gzB3wJ0ZPt38pANZyWaBHy3FBm6RElF7KX4RdXl82e7pmyn9DM8C4IKpYC
+	+O6nzkXPRhVlKciQpwfF5GN0rZ5zlGjYyOUrWV6LK6T/P+UxPBPRYm0x2Fdc/ywCPg7MhjmctrZ
+	wn/y1R8PIf+7UuXE2Feca/WRqmVFIfWRg2BjyRyWF3733Pe6qV8me7Et5M388NMtPXYepoJW0H7
+	Z04Cx7Itqixf+GkFOZAtP0bde3ui+VrXkiE0zdFp4XbSvakyq2eUZZk+A+E9ff2C3XquNwTI4fs
+	OZBM6JABNUwrjpG9STHMsyV6NvvdVuaIPV39RlvrBREBW85MS3/6dvZVq7+TxELOgMEYzpyPbN3
+	tUwAtXsxuZ4Cf+vWJNOOv+Pt/0U=
+X-Received: by 2002:ad4:5f46:0:b0:91b:8b2b:5a0 with SMTP id 6a1803df08f44-91b8b2b064amr172533146d6.23.1792002647156;
+        Wed, 14 Oct 2026 11:30:47 -0700 (PDT)
+Return-Path: <rohan@anthologyintelligence.com>
+Received: from 01a13bae-5866-7f4d-a7da-9e04f7b18aed.local (ec2-44-210-79-1.compute-1.amazonaws.com. [44.210.79.1])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b97b387e0sm59111906d6.12.2026.10.14.11.30.46
+        for <chrisjamescameron1@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 11:30:46 -0700 (PDT)
+Message-ID:
+ <01a13bae-5866-7f4d-a7da-9e04f7b18aed@anthologyintelligence.com>
+List-Unsubscribe:
+ <https://link.inproxalberta1.net/unsub/1/01a12842-e709-7d98-a64d-c2a8239330aa>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-Mail-Abuse-Inquiries:
+ https://app.instantly.ai/privacy/report-abuse/01a13bae-5866-7f4d-a7da-9e04f7b18aed
+From: Rohan Ghiya <rohan@anthologyintelligence.com>
+To: chrisjamescameron1@gmail.com
+Subject: Inference Optimization and GPU Kernels at Anthology
+Date: Wed, 14 Oct 2026 18:30:46 +0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--_NmP-29e61dda5f4b34da-Part_1"
+
+----_NmP-29e61dda5f4b34da-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hey,
+
+I'm Rohan from Anthology. We work with leading frontier AI labs to =
+build training environments and evaluations for challenging engineering and=
+ research problems.
+
+We're recruiting engineers who work on GPU kernels, =
+inference optimization, model serving, quantization, or other GPU and =
+inference specialties to join Anthology Fellows, our invite-only network of=
+ engineers and researchers.
+
+This isn't routine data labeling. You'll work =
+closely with our research team and other Fellows to create kernel and =
+inference optimization tasks, build reference solutions and automated =
+evaluations, and review each other's work.
+
+Compensation is up to $150/hour=
+, depending on location and experience. The work is fully remote and =
+project-based, designed to fit alongside your current commitments. =
+Schedules are flexible, with 20 to 40 hours per week depending on project =
+needs.
+
+We're prioritizing applicants who apply in the next 72 hours. =
+Here's the application link if you'd like to join: https://anthologyresearc=
+h.ai/roles/ml-systems-engineer-kernels-inference-1a4903/i
+
+Best,
+Rohan
+Anthology
+
+--
+----_NmP-29e61dda5f4b34da-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hey,</div><div><br /></div><div>I'm Rohan from Anthology. We work with=
+ leading frontier AI labs to build training environments and evaluations =
+for challenging engineering and research problems.</div><div><br =
+/></div><div>We're recruiting engineers who work on GPU kernels, inference =
+optimization, model serving, quantization, or other GPU and inference =
+specialties to join Anthology Fellows, our invite-only network of engineers=
+ and researchers.</div><div><br /></div><div>This isn't routine data =
+labeling. You'll work closely with our research team and other Fellows to =
+create kernel and inference optimization tasks, build reference solutions =
+and automated evaluations, and review each other's work.</div><div><br =
+/></div><div>Compensation is up to $150/hour, depending on location and =
+experience. The work is fully remote and project-based, designed to fit =
+alongside your current commitments. Schedules are flexible, with 20 to 40 =
+hours per week depending on project needs.</div><div><br /></div><div>We're=
+ prioritizing applicants who apply in the next 72 hours. Here's the =
+application link if you'd like to join: https://anthologyresearch.=
+ai/roles/ml-systems-engineer-kernels-inference-1a4903/i</div><div><br =
+/></div><div>Best,</div><div>Rohan</div><div>Anthology</div>
+<img src=3D'https://link.inproxalberta1.net/signature/images/C9_8Rx125ai9FI=
+34uEaxr.png' alt=3D'line'>
+----_NmP-29e61dda5f4b34da-Part_1--

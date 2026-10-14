@@ -1,0 +1,83 @@
+% Resume template. Build with: latexmk -pdf resume.tex
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{RGB}{30,60,110}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.6ex}\titlerule]
+\titlespacing*{\section}{0pt}{1.6ex}{1ex}
+
+\setlist[itemize]{leftmargin=1.2em, itemsep=0.2ex, topsep=0.4ex, parsep=0pt}
+
+% \entry{Title}{Dates}{Organisation}{Location}
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4}
+  \end{tabularx}\par}
+
+% \project{Name}{Link or tech stack}
+\newcommand{\project}[2]{%
+  \begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & \small #2
+  \end{tabularx}\par}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Chris Cameron}\\[0.8ex]
+  \href{mailto:chrisjamescameron1@gmail.com}{chrisjamescameron1@gmail.com}
+  \enspace$\cdot$\enspace \href{https://github.com/ccam80}{github.com/ccam80}
+  \enspace$\cdot$\enspace Location
+\end{center}
+
+\section{Summary}
+Two or three sentences on GPU kernel and inference optimisation experience.
+
+\section{Experience}
+\entry{Role Title}{Mon YYYY -- Present}{Organisation}{City, Country}
+\begin{itemize}
+  \item Achievement with a measured result (e.g.\ speed-up, throughput, latency).
+  \item Achievement with a measured result.
+\end{itemize}
+
+\entry{Role Title}{Mon YYYY -- Mon YYYY}{Organisation}{City, Country}
+\begin{itemize}
+  \item Achievement with a measured result.
+\end{itemize}
+
+\section{Projects}
+\project{Project Name}{CUDA, Python}
+\begin{itemize}
+  \item What it does and the result.
+\end{itemize}
+
+\section{Education}
+\entry{Degree, Field}{YYYY -- YYYY}{Institution}{City, Country}
+
+\section{Publications}
+\begin{itemize}
+  \item Authors. \textit{Title}. Venue, Year.
+\end{itemize}
+
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+  \textbf{GPU} & CUDA, Triton, profiling (Nsight Compute, Nsight Systems) \\
+  \textbf{Languages} & Python, C++ \\
+  \textbf{Tools} & Git, LaTeX
+\end{tabularx}
+
+\end{document}
