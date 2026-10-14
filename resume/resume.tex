@@ -1,4 +1,4 @@
-% Resume template. Build with: latexmk -pdf resume.tex
+% Build with: latexmk -pdf resume.tex
 \documentclass[10pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
@@ -7,7 +7,6 @@
 \usepackage[margin=1.8cm]{geometry}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 
@@ -15,25 +14,14 @@
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parskip}{0.6ex}
 
 \titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.6ex}\titlerule]
 \titlespacing*{\section}{0pt}{1.6ex}{1ex}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{1.2ex}{0.2ex}
 
-\setlist[itemize]{leftmargin=1.2em, itemsep=0.2ex, topsep=0.4ex, parsep=0pt}
-
-% \entry{Title}{Dates}{Organisation}{Location}
-\newcommand{\entry}[4]{%
-  \begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & #2 \\
-    \textit{#3} & \textit{#4}
-  \end{tabularx}\par}
-
-% \project{Name}{Link or tech stack}
-\newcommand{\project}[2]{%
-  \begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \small #2
-  \end{tabularx}\par}
+\setlist[itemize]{leftmargin=1.2em, itemsep=0.2ex, topsep=0.2ex, parsep=0pt}
 
 \begin{document}
 
@@ -41,43 +29,87 @@
   {\LARGE\bfseries Chris Cameron}\\[0.8ex]
   \href{mailto:chrisjamescameron1@gmail.com}{chrisjamescameron1@gmail.com}
   \enspace$\cdot$\enspace \href{https://github.com/ccam80}{github.com/ccam80}
-  \enspace$\cdot$\enspace Location
+  \enspace$\cdot$\enspace Christchurch, New Zealand
 \end{center}
 
-\section{Summary}
-Two or three sentences on GPU kernel and inference optimisation experience.
+{\small\itshape This is an AI-built one-page resume put together for this role.
+A full resume seems irrelevant, since the invitation relates to my public
+open-source work.}
 
-\section{Experience}
-\entry{Role Title}{Mon YYYY -- Present}{Organisation}{City, Country}
-\begin{itemize}
-  \item Achievement with a measured result (e.g.\ speed-up, throughput, latency).
-  \item Achievement with a measured result.
-\end{itemize}
+\section{Background}
+PhD student and part-time lecturer, finishing in early 2027. I had a previous
+life managing a group of bars and restaurants, completed an undergraduate
+engineering degree, and am now nearing the end of a PhD. The academic context
+for my GPU work is electrophysiology: I simulate detailed cell models to
+identify autonomic nervous system parameters, as an improvement on
+heart-rate variability measurements.
 
-\entry{Role Title}{Mon YYYY -- Mon YYYY}{Organisation}{City, Country}
-\begin{itemize}
-  \item Achievement with a measured result.
-\end{itemize}
+\section{Cubie: GPU numerical integration through Python}
+Cubie runs numerical integration kernels on domestic CUDA cards. It integrates
+one system of equations per thread, a workload that is arithmetically intense
+and keeps a wide range of values live. The problem is traditionally treated as
+non-parallelisable, but modern GPUs can carry the per-thread load. In my draft
+comparisons (pending publication), Cubie is about 10,000$\times$ faster than
+the engineering-standard integrators in MATLAB and SciPy, and about
+100$\times$ faster than its nearest competitor, DiffEqGPU.jl from the SciML
+team at MIT. Cubie JIT-compiles its kernels through numba-cuda-mlir, so
+compile-time choices such as memory placement and loop unrolling adapt to
+each user's problem.
 
-\section{Projects}
-\project{Project Name}{CUDA, Python}
-\begin{itemize}
-  \item What it does and the result.
-\end{itemize}
-
-\section{Education}
-\entry{Degree, Field}{YYYY -- YYYY}{Institution}{City, Country}
-
-\section{Publications}
-\begin{itemize}
-  \item Authors. \textit{Title}. Venue, Year.
-\end{itemize}
-
+\noindent
+\begin{minipage}[t]{0.48\linewidth}
 \section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-  \textbf{GPU} & CUDA, Triton, profiling (Nsight Compute, Nsight Systems) \\
-  \textbf{Languages} & Python, C++ \\
-  \textbf{Tools} & Git, LaTeX
-\end{tabularx}
+\subsection{Dynamic optimisation in Cubie kernels}
+\begin{itemize}
+  \item Occupancy management based on L2 usage
+  \item Loop unrolling based on instruction count in hot regions
+\end{itemize}
+
+\subsection{Strong knowledge areas}
+\begin{itemize}
+  \item CUDA memory hierarchy
+  \item Operator fusion
+  \item Nsight Compute profiling; tracing bottlenecks and stall causes
+\end{itemize}
+
+\subsection{AI and LLMs}
+\begin{itemize}
+  \item AI-native in coding and research workflows
+  \item Verification-tools-first habits from using agentic AI in knowledge work
+  \item Checking and scaffolding skills sharpened on earlier models that
+        badly needed them
+\end{itemize}
+
+\subsection{Areas to supplement}
+\begin{itemize}
+  \item Inference systems, model compression and decoding, which my current
+        work does not touch
+  \item I would be very interested in learning speculative decoding
+\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\section{Related work}
+\subsection{\href{https://github.com/cubiepy/cubie}{Cubie}}
+Author and maintainer. Published on PyPI.
+
+\subsection{\href{https://github.com/ccam80/GPUODEBenchmarks}{GPUODEBenchmarks}}
+Times and cross-checks GPU ensemble ODE solvers (Cubie, Diffrax, torchdiffeq,
+MPGOS, DiffEqGPU.jl) on identical problems.
+
+\subsection{Compiler PRs: numba-cuda-mlir, numba-cuda}
+\begin{itemize}
+  \item \texttt{cuda.unroll} / \texttt{cuda.nounroll} loop unroll hints
+  \item Merged: compiler front-end speed-ups (dominators, CFG ordering,
+        liveness) and AST transform repair
+  \item Merged: race condition fix in the numba-cuda simulator
+\end{itemize}
+
+\subsection{SymPy and lcapy}
+Minor edits.
+
+\subsection{\href{https://github.com/ccam80/deep-zotero}{deep-zotero}}
+Local semantic search database for academic papers.
+\end{minipage}
 
 \end{document}
