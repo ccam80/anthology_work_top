@@ -10,11 +10,18 @@
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{paracol}
+\usepackage{microtype}
 
-\setlength{\columnsep}{0.6cm}
+\setlength{\columnsep}{0.9cm}
 
 \definecolor{accent}{RGB}{30,60,110}
 \definecolor{muted}{RGB}{100,100,100}
+\definecolor{sidebg}{RGB}{236,241,248}
+
+% Prefer looser spacing over hyphenating words.
+\hyphenpenalty=5000
+\tolerance=1000
+\emergencystretch=2em
 
 \pagestyle{empty}
 \setlength{\parindent}{10pt}
@@ -36,9 +43,9 @@
 
 % \repo{Name}{URL}{display URL}{description}
 \newcommand{\repo}[4]{%
-  \sideitem{\href{#2}{#1}}%
-  {\footnotesize\color{muted}\href{#2}{#3}\par}%
-  {\small #4\par}}
+  \par\vspace{1.2ex}{\bfseries\href{#2}{#1}\par}%
+  {\footnotesize\color{muted}\href{#2}{#3}\par}\vspace{0.3ex}%
+  \begin{itemize}\item #4\end{itemize}}
 
 \begin{document}
 
@@ -54,6 +61,7 @@
 % public open-source project.\par}
 
 \columnratio{0.63}
+\backgroundcolor{c[1](10pt,8pt)}{sidebg}
 \begin{paracol}{2}
 \section{Summary}
 PhD student (finishing early 2027) and part-time lecturer. I had a previous
@@ -65,17 +73,15 @@ My research is in electrophysiology, simulating detailed cell
 models to identify autonomic nervous system parameters as an improvement to
 heart-rate variability measurements.
 
-\section{Project \& Relevant Skills}
 \section{Cubie}
-Cubie is an open-source
-Python project which performs numerical integration on consumer NVIDIA GPUs.
-My research interest was in large-scale parameter studies for real-time estimation
-of physiological parameters using a Bayesian approach. This would have been a
-pointless toy if the simulation could not be completed faster than real-time, so
-I built Cubie to do it.
+I will have shown up as a lead for this role due to my work on Cubie.
+\subsection{What and why}
+Cubie is an open-source Python project which performs numerical integration on consumer NVIDIA GPUs.
+Its goal is to put high-performance computing in the hands of everyday researchers and engineers.
+My research interest was in large-scale parameter studies for estimation of physiological parameters using a Bayesian approach. 
+This would have been a pointless toy if the simulation could not be completed faster than real-time, so I built Cubie to do it.
 
-\subsection{GPU Kernels and Optimisation}
-
+\subsection{Why it's relevant}
 Numerical integration is inherently sequential, as each sample depends on the previous one.
 Cubie parallelises across parameter sets and initial conditions, running a full time-integration per thread.
 The workload can be memory- or compute-bound, depending on the user-supplied set of equations to solve.
@@ -85,20 +91,11 @@ In no-spill kernels, performance is either limited by math-required control flow
 Cubie kernels are JIT-compiled through
 \mbox{numba-cuda-mlir}, which allows dynamic optimisations based on a user's problem set.
 Cubie's source code is written in Python, but typing and use of CUDA primitives is explicit and carefully managed.
-Cubie ``goes fast'' due to algorithm design, operation scheduling, memory placement, and dynamic/heuristic optimisations.
+Cubie ``goes fast'' due to the memory and iteration design of its algorithm implementations,
+and through careful operation scheduling, memory placement, and dynamic/heuristic optimisations.
 
-Building Cubie has taken me deep into the inner workings of NVIDIA GPUs. I have a strong understanding of:
-\begin{itemize}
-  \item Memory hierarchy and management
-  \item Warp scheduling and occupancy
-  \item Nsight profiling tools and bottleneck identification
-  \item Kernel optimization techniques
-\end{itemize}
-
-
-In my (draft, pending publishing) comparisons Cubie offers a 10,000$\times$ speedup
-over general-use programs like MATLAB and SciPy, and 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl
-from the SciML team at MIT.
+In my (draft, pending publishing) comparisons Cubie offers a 10,000$\times$ speedup over general-use programs like MATLAB and SciPy, and 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl.
+Building Cubie has taken me deep into the inner workings of NVIDIA GPUs, and gives me a strong backing in GPU kernel optimisation.
 
 \switchcolumn
 \raggedright
@@ -125,27 +122,27 @@ from the SciML team at MIT.
 
 \vfill
 \sidehead{My Projects}
-\repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}{}
-\repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}{}
+\repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}{GPU-based ODE solver}
+\repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}{Performance benchmarks for GPU-based ODE solvers}
 \repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}{Local semantic search db for academic papers}
 
 \vfill
-\sidehead{Others' Projects (open/merged)}
+\sidehead{Others' Projects (merged/open)}
 \sideitem{numba-cuda(-mlir)}
 \begin{itemize}
-  \item Compiler performance (3, 6)
-  \item Lowering/typing correctness (3, 6)
-  \item Kernel performance controls (3, 0)
+  \item Compiler performance (6, 3)
+  \item Lowering/typing correctness (6, 3)
+  \item Kernel performance controls (0, 3)
   \item AST transforms (1, 1)
-  \item Misc fixes (2, 3)
+  \item Misc fixes (3, 2)
 \end{itemize}
 \sideitem{sympy}
 \begin{itemize}
-  \item Minor printer edit (0, 1)
+  \item Minor printer edit (1, 0)
 \end{itemize}
 \sideitem{lcapy}
 \begin{itemize}
-  \item Docs edits (0, 1)
+  \item Docs edits (1, 0)
 \end{itemize}
 \end{paracol}
 
