@@ -1,0 +1,82 @@
+% Build with: pdflatex resume-review.tex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\definecolor{accent}{RGB}{30,60,110}
+\definecolor{muted}{RGB}{85,85,85}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\linespread{1.10}
+\hyphenpenalty=10000
+\emergencystretch=2em
+\raggedright
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{3pt}\titlerule]
+\titlespacing*{\section}{0pt}{16pt}{8pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=5pt,topsep=4pt,parsep=0pt}
+\newcommand{\project}[3]{%
+  \par\vspace{4pt}\textbf{\href{#2}{#1}}\hfill
+  {\small\color{muted}\href{#2}{#3}}\par}
+
+\begin{document}
+
+{\fontsize{28}{32}\selectfont\bfseries Chris Cameron\par}
+\vspace{2pt}
+\href{mailto:chrisjamescameron1@gmail.com}{chrisjamescameron1@gmail.com}
+\enspace$\cdot$\enspace
+\href{https://github.com/ccam80}{github.com/ccam80}
+
+\vspace{8pt}
+PhD researcher in electrophysiology (completion expected early 2027)
+and creator of Cubie. Part-time lecturer teaching undergraduate and
+postgraduate mechatronics, including computer architecture, C programming,
+circuit design, and embedded systems.
+
+\section{Cubie --- GPU numerical integration}
+{\small\color{muted}\href{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}\par}
+Built an open-source Python ODE solver for consumer NVIDIA GPUs to support
+electrophysiology simulations for a real-time application.
+
+Draft, unpublished benchmarks show \textbf{10,000$\times$ speedup}
+over CPU implementations (SciPy, MATLAB) and \textbf{100$\times$}
+over DiffEqGPU.jl.
+
+\begin{itemize}
+  \item Optimised CUDA kernels using NVIDIA Nsight Compute: reordered
+    operations, changed memory placement, and substituted individual instructions.
+  \item Tuned occupancy to fit cache sizes and adjusted loop unrolling
+    to fit the instruction cache.
+  \item Instrumented internal solver stages to verify numerical
+    correctness throughout the integration.
+  \item Review AI-generated implementations through pull requests and
+    agent sessions, identifying errors and validating numerical behaviour
+    in a specialised codebase.
+\end{itemize}
+
+\section{Open-source contributions}
+\textbf{numba-cuda / numba-cuda-mlir}\par
+Merged and open pull requests addressing compiler performance, typing and
+lowering correctness, and AST transforms. Open pull requests for kernel
+performance controls.
+
+\textbf{SymPy} --- merged printer edit.
+\quad\textbf{lcapy} --- merged documentation edits.
+
+\section{Other projects}
+\project{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}
+Performance benchmarks for GPU-based ODE solvers.
+
+\project{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}
+Local semantic search database for academic papers.
+
+\end{document}
