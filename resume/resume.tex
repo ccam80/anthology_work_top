@@ -1,5 +1,5 @@
 % Build with: latexmk -pdf resume.tex
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -9,16 +9,19 @@
 \usepackage{titlesec}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
+\usepackage{paracol}
+
+\setlength{\columnsep}{0.6cm}
 
 \definecolor{accent}{RGB}{30,60,110}
 \definecolor{muted}{RGB}{100,100,100}
 
 \pagestyle{empty}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parindent}{10pt}
+\setlength{\parskip}{2pt}
 \linespread{1.08}
 
-\titleformat{\section}{\Large\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.4ex}\titlerule]
+\titleformat{\section}{\Large\bfseries\color{accent}\raggedright}{}{0pt}{}[\vspace{-0.4ex}\titlerule]
 \titlespacing*{\section}{0pt}{1ex}{1.2ex}
 \titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
 \titlespacing*{\subsection}{0pt}{2.2ex}{0.6ex}
@@ -27,7 +30,8 @@
 
 % \repo{Name}{URL}{display URL}
 \newcommand{\repo}[3]{%
-  \subsection{\href{#2}{#1}\hfill{\small\mdseries\color{muted}#3}}}
+  \subsection{\href{#2}{#1}}%
+  {\footnotesize\color{muted}\href{#2}{#3}\par}}
 
 \begin{document}
 
@@ -37,43 +41,75 @@
   \enspace$\cdot$\enspace \href{https://github.com/ccam80}{github.com/ccam80}
 \end{center}
 
-\vspace{2ex}
-{\small\itshape\color{muted} This is an AI-built 1-page resume put together
-for this role; a full resume seems irrelevant since the invite relates to my
-public open-source project.\par}
+% \vspace{2ex}
+% {\small\itshape\color{muted} This is an AI-built 1-page resume put together
+% for this role; a full resume seems irrelevant since the invite relates to my
+% public open-source project.\par}
 
-\vfill
-\section{Not GPU-related}
-PhD student and part-time lecturer, finishing early 2027. I had a previous
+\columnratio{0.66}
+\begin{paracol}{2}
+\section{Summary}
+PhD student (finishing early 2027) and part-time lecturer. I had a previous
 life managing a group of bars and restaurants, completed an Engineering
-undergraduate degree, and am now nearing the end of a PhD. The academic
-context for my GPU work is in electrophysiology, simulating detailed cell
+undergraduate degree, and have since worked some interesting internships and contract
+mechatronics projects. I teach undergraduate and postgraduate mechatronics engineering
+courses in computer architecture, introductory C programming, circuit analysis and design, and embedded systems.
+My research is in electrophysiology, simulating detailed cell
 models to identify autonomic nervous system parameters as an improvement to
 heart-rate variability measurements.
 
-\vfill
-\section{GPU-related}
-\textbf{Cubie} -- a numerical integration/simulation suite for CUDA, through
-Python.\par\vspace{1ex}
-Cubie runs numerical integration kernels on domestic CUDA cards. It integrates
-one system of equations per thread, a workload that is arithmetically intense
-and requires wide ranges of live values. It is (traditionally) a
-non-parallelisable problem, but modern GPUs can handle the per-thread load. In
-my (draft, pending publishing) comparisons it offers a 10,000$\times$ speedup
-over the Engineering standard numerical integrating software, MATLAB and
-SciPy, and a 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl
-from the SciML team at MIT. Cubie kernels are JIT-compiled through
-\mbox{numba-cuda-mlir}, which allows dynamic configuration of compile-time
-performance tweaks like memory allocations and loop unrolling to match a
-user's given problem set.
+\section{Project \& Relevant Skills}
+\section{Cubie}
+Cubie is an open-source
+Python project which performs numerical integration on consumer NVIDIA GPUs.
+My research interest was in large-scale parameter studies for real-time estimation
+of physiological parameters using a Bayesian approach. This would have been a
+pointless toy if the simulation could not be completed faster than real-time, so
+I built Cubie to do it.
 
-\vfill
-\section{Project-specific}
-\subsection{Dynamic optimisation in Cubie kernels}
+\subsection{GPU Kernels and Optimisation}
+
+Numerical integration is inherently sequential, as each sample depends on the previous one.
+Cubie parallelises across parameter sets and initial conditions, running a full time-integration per thread.
+The workload can be memory- or compute-bound, depending on the user-supplied set of equations to solve.
+Occupancy is limited by registers for most non-toy problems, and performance in these kernels is memory-bound through spills.
+In no-spill kernels, performance is either limited by math-required control flow or floating point pipeline throughput.
+
+Cubie kernels are JIT-compiled through
+\mbox{numba-cuda-mlir}, which allows dynamic optimisations based on a user's problem set.
+Cubie's source code is written in Python, but typing and use of CUDA primitives is explicit and carefully managed.
+Cubie ``goes fast'' due to algorithm design, operation scheduling, memory placement, and dynamic/heuristic optimisations.
+
+Building Cubie has taken me deep into the inner workings of NVIDIA GPUs. I have a strong understanding of:
 \begin{itemize}
-  \item Occupancy management based on L2 usage
-  \item Loop unrolling based on instruction count in hot regions
+  \item Memory hierarchy and management
+  \item Warp scheduling and occupancy
+  \item Nsight profiling tools and bottleneck identification
+  \item Kernel optimization techniques
 \end{itemize}
+
+
+In my (draft, pending publishing) comparisons Cubie offers a 10,000$\times$ speedup
+over general-use programs like MATLAB and SciPy, and 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl
+from the SciML team at MIT.
+
+\section{Open-source contributions}
+numba-cuda(-mlir) compiler PRs:
+\begin{itemize}[topsep=0.6ex]
+  \item Compiler performance improvements (6 merged, 3 open)
+  \item Lowering/typing correctness (6 merged, 3 open)
+  \item Kernel performance controls (3 open)
+  \item AST transforms (1 merged, 1 open)
+  \item Runtime fixes, LLVM interface, compiled code annotation
+        (2 merged, 2 open)
+  \item CPU simulator race condition (1 merged)
+\end{itemize}
+\vspace{1ex}
+Minor sympy/lcapy edits
+
+\switchcolumn
+\raggedright
+\section{Relevant Knowledge and Skills}
 
 \subsection{Strong knowledge areas}
 \begin{itemize}
@@ -91,33 +127,11 @@ user's given problem set.
         that badly needed it
 \end{itemize}
 
-\subsection{Areas to supplement}
-\begin{itemize}
-  \item Inference systems, model compression, and decoding knowledge not
-        related to my current work
-  \item I'd be very interested in understanding speculative decoding
-\end{itemize}
-
-\vfill
 \section{Related work}
 \repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}
 \repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}
 \repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}
 Local semantic search db for academic papers
-
-\vfill
-\section{Open-source contributions}
-numba-cuda(-mlir) compiler PRs:
-\begin{itemize}[topsep=0.6ex]
-  \item Compiler performance improvements (6 merged, 3 open)
-  \item Lowering/typing correctness (6 merged, 3 open)
-  \item Kernel performance controls (3 open)
-  \item AST transforms (1 merged, 1 open)
-  \item Runtime fixes, LLVM interface, compiled code annotation
-        (2 merged, 2 open)
-  \item CPU simulator race condition (1 merged)
-\end{itemize}
-\vspace{1ex}
-Minor sympy/lcapy edits
+\end{paracol}
 
 \end{document}
