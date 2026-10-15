@@ -1,7 +1,6 @@
 # ML Engineer: Inference Optimization and GPU Kernels
 
-Source: https://anthologyresearch.ai/roles/ml-systems-engineer-kernels-inference-1a4903/i
-(retrieved 2026-10-15)
+This text was copied from https://anthologyresearch.ai/roles/ml-systems-engineer-kernels-inference-1a4903/i on 2026-10-15.
 
 - Up to $150/hour
 - Remote (Global)
