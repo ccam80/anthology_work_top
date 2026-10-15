@@ -43,9 +43,8 @@
 
 % \repo{Name}{URL}{display URL}{description}
 \newcommand{\repo}[4]{%
-  \par\vspace{1.2ex}{\bfseries\href{#2}{#1}\par}%
-  {\footnotesize\color{muted}\href{#2}{#3}\par}\vspace{0.3ex}%
-  \begin{itemize}\item #4\end{itemize}}
+  \par\vspace{1.2ex}{\bfseries\href{#2}{#1}} -- #4\par
+  {\footnotesize\color{muted}\href{#2}{#3}\par}}
 
 \begin{document}
 
@@ -60,9 +59,14 @@
 % for this role; a full resume seems irrelevant since the invite relates to my
 % public open-source project.\par}
 
+% Pull the first headings up so the sidebar shading starts at the heading's top.
+\newlength{\colheadshift}
+\setlength{\colheadshift}{10pt}
+\vspace{\colheadshift}
 \columnratio{0.63}
-\backgroundcolor{c[1](10pt,8pt)}{sidebg}
+\backgroundcolor{c[1](10pt,0pt)}{sidebg}
 \begin{paracol}{2}
+\vspace*{-\colheadshift}
 \section{Summary}
 PhD student (finishing early 2027) and part-time lecturer. I had a previous
 life managing a group of bars and restaurants, completed an Engineering
@@ -100,6 +104,7 @@ Building Cubie has taken me deep into the inner workings of NVIDIA GPUs, and giv
 \switchcolumn
 \raggedright
 \setlength{\parindent}{0pt}
+\vspace*{-\colheadshift}
 \section{Anthology Fit}
 
 \sidehead{Skills}
