@@ -37,14 +37,14 @@
 \href{https://github.com/ccam80}{github.com/ccam80}
 
 \vspace{8pt}
-PhD researcher in electrophysiology (completion expected early 2027)
-and creator of Cubie. Part-time lecturer teaching undergraduate and
+I am a PhD researcher in electrophysiology (completion expected early 2027)
+and creator of Cubie. I also lecture part-time in undergraduate and
 postgraduate mechatronics, including computer architecture, C programming,
 circuit design, and embedded systems.
 
 \section{Cubie --- GPU numerical integration}
 {\small\color{muted}\href{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}\par}
-Built an open-source Python ODE solver for consumer NVIDIA GPUs to support
+I built Cubie, an open-source Python ODE solver for consumer NVIDIA GPUs, to support
 electrophysiology simulations for a real-time application.
 
 Draft, unpublished benchmarks show \textbf{10,000$\times$ speedup}
@@ -52,25 +52,23 @@ over CPU implementations (SciPy, MATLAB) and \textbf{100$\times$}
 over DiffEqGPU.jl.
 
 \begin{itemize}
-  \item Optimised CUDA kernels using NVIDIA Nsight Compute: reordered
-    operations, changed memory placement, and substituted individual instructions.
-  \item Tuned occupancy to fit cache sizes and adjusted loop unrolling
+  \item I used NVIDIA Nsight Compute to guide CUDA kernel optimisation,
+    changing operation ordering, memory placement, and individual instructions.
+  \item I tuned occupancy to fit cache sizes and adjusted loop unrolling
     to fit the instruction cache.
-  \item Instrumented internal solver stages to verify numerical
+  \item I instrumented internal solver stages to verify numerical
     correctness throughout the integration.
-  \item Review AI-generated implementations through pull requests and
+  \item I review AI-generated implementations through pull requests and
     agent sessions, identifying errors and validating numerical behaviour
     in a specialised codebase.
 \end{itemize}
 
 \section{Open-source contributions}
 \textbf{numba-cuda / numba-cuda-mlir}\par
-Merged and open pull requests addressing compiler performance, typing and
-lowering correctness, and AST transforms. Open pull requests for kernel
-performance controls.
+My merged and open pull requests address compiler performance, typing and
+lowering correctness, AST transforms, and kernel performance controls.
 
-\textbf{SymPy} --- merged printer edit.
-\quad\textbf{lcapy} --- merged documentation edits.
+\textbf{SymPy and lcapy} --- minor edits.
 
 \section{Other projects}
 \project{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}
