@@ -28,10 +28,11 @@
 
 \setlist[itemize]{leftmargin=1.2em, itemsep=0.5ex, topsep=0pt, parsep=0pt}
 
-% \repo{Name}{URL}{display URL}
-\newcommand{\repo}[3]{%
+% \repo{Name}{URL}{display URL}{description}
+\newcommand{\repo}[4]{%
   \subsection{\href{#2}{#1}}%
-  {\footnotesize\color{muted}\href{#2}{#3}\par}}
+  {\footnotesize\color{muted}\href{#2}{#3}\par}%
+  #4\par}
 
 \begin{document}
 
@@ -46,7 +47,7 @@
 % for this role; a full resume seems irrelevant since the invite relates to my
 % public open-source project.\par}
 
-\columnratio{0.66}
+\columnratio{0.63}
 \begin{paracol}{2}
 \section{Summary}
 PhD student (finishing early 2027) and part-time lecturer. I had a previous
@@ -95,43 +96,50 @@ from the SciML team at MIT.
 
 \switchcolumn
 \raggedright
-\section{Relevant Knowledge and Skills}
+\section{Relevant Skills}
 
-\subsection{Strong knowledge areas}
+\subsection{Strong CUDA knowledge}
 \begin{itemize}
-  \item CUDA memory hierarchy
-  \item Operator fusion
-  \item NCU profiling, bottleneck/stall cause tracing
+  \item CUDA memory hierarchy.
+  \item Operator fusion.
+  \item NCU profiling. 
+  \item Bottleneck/stall identification.
 \end{itemize}
 
-\subsection{AI \& LLMs}
+\subsection{AI familiarity}
 \begin{itemize}
-  \item AI-native in coding/research workflows
-  \item Strong verification-tools-first habits from using agentic AI in
-        knowledge work
+  \item AI-native in coding/research workflows.
+  \item Verification-tools-first habits from using agentic AI in
+        knowledge work.
   \item Checking and scaffolding skills sharpened on previous-gen models
-        that badly needed it
+        that badly needed it.
 \end{itemize}
 
+\vfill
 \section{Related work}
-\repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}
-\repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}
-\repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}
-Local semantic search db for academic papers
+\repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}{}
+\repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}{}
+\repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}{Local semantic search db for academic papers}
 
-\section{Open-source contributions}
-numba-cuda(-mlir) compiler PRs:
+\vfill
+\section{Open-source PRs (merged, open)}
+\textbf{numba-cuda(-mlir)}:
 \begin{itemize}[topsep=0.6ex]
-  \item Compiler performance improvements (6 merged, 3 open)
-  \item Lowering/typing correctness (6 merged, 3 open)
-  \item Kernel performance controls (3 open)
-  \item AST transforms (1 merged, 1 open)
-  \item Runtime fixes, LLVM interface, compiled code annotation
-        (2 merged, 2 open)
-  \item CPU simulator race condition (1 merged)
+  \item Compiler performance (6, 3)
+  \item Lowering/typing correctness (6, 3)
+  \item Kernel performance controls (0, 3)
+  \item AST transforms (1, 1)
+  \item Misc fixes (3, 2)
 \end{itemize}
 \vspace{1ex}
-Minor sympy/lcapy edits
+\textbf{sympy}
+\begin{itemize}[topsep=0.6ex]
+  \item Minor printer edit (1, 0)
+\end{itemize}
+\textbf{lcapy}
+\begin{itemize}[topsep=0.6ex]
+  \item Docs edits (1, 0)
+\end{itemize}
 \end{paracol}
 
 \end{document}
