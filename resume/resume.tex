@@ -28,11 +28,17 @@
 
 \setlist[itemize]{leftmargin=1.2em, itemsep=0.5ex, topsep=0pt, parsep=0pt}
 
+% Sidebar headings sit one level below \section.
+\newcommand{\sidehead}[1]{%
+  \par\vspace{1.8ex}{\large\bfseries\color{accent}#1\par}\vspace{0.4ex}}
+\newcommand{\sideitem}[1]{%
+  \par\vspace{1.2ex}{\bfseries #1\par}\vspace{0.3ex}}
+
 % \repo{Name}{URL}{display URL}{description}
 \newcommand{\repo}[4]{%
-  \subsection{\href{#2}{#1}}%
+  \sideitem{\href{#2}{#1}}%
   {\footnotesize\color{muted}\href{#2}{#3}\par}%
-  #4\par}
+  {\small #4\par}}
 
 \begin{document}
 
@@ -96,9 +102,11 @@ from the SciML team at MIT.
 
 \switchcolumn
 \raggedright
-\section{Relevant Skills}
+\setlength{\parindent}{0pt}
+\section{Anthology Fit}
 
-\subsection{Strong CUDA knowledge}
+\sidehead{Skills}
+\sideitem{Strong CUDA knowledge}
 \begin{itemize}
   \item CUDA memory hierarchy.
   \item Operator fusion.
@@ -106,7 +114,7 @@ from the SciML team at MIT.
   \item Bottleneck/stall identification.
 \end{itemize}
 
-\subsection{AI familiarity}
+\sideitem{AI familiarity}
 \begin{itemize}
   \item AI-native in coding/research workflows.
   \item Verification-tools-first habits from using agentic AI in
@@ -116,29 +124,28 @@ from the SciML team at MIT.
 \end{itemize}
 
 \vfill
-\section{Related work}
+\sidehead{My Projects}
 \repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}{}
 \repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}{}
 \repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}{Local semantic search db for academic papers}
 
 \vfill
-\section{Open-source PRs (merged, open)}
-\textbf{numba-cuda(-mlir)}:
-\begin{itemize}[topsep=0.6ex]
-  \item Compiler performance (6, 3)
-  \item Lowering/typing correctness (6, 3)
-  \item Kernel performance controls (0, 3)
+\sidehead{Others' Projects (open/merged)}
+\sideitem{numba-cuda(-mlir)}
+\begin{itemize}
+  \item Compiler performance (3, 6)
+  \item Lowering/typing correctness (3, 6)
+  \item Kernel performance controls (3, 0)
   \item AST transforms (1, 1)
-  \item Misc fixes (3, 2)
+  \item Misc fixes (2, 3)
 \end{itemize}
-\vspace{1ex}
-\textbf{sympy}
-\begin{itemize}[topsep=0.6ex]
-  \item Minor printer edit (1, 0)
+\sideitem{sympy}
+\begin{itemize}
+  \item Minor printer edit (0, 1)
 \end{itemize}
-\textbf{lcapy}
-\begin{itemize}[topsep=0.6ex]
-  \item Docs edits (1, 0)
+\sideitem{lcapy}
+\begin{itemize}
+  \item Docs edits (0, 1)
 \end{itemize}
 \end{paracol}
 
