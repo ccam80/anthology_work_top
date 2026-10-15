@@ -78,28 +78,30 @@ models to identify autonomic nervous system parameters as an improvement to
 heart-rate variability measurements.
 
 \section{Cubie}
-I will have shown up as a lead for this role due to my work on Cubie.
-\subsection{What and why}
+% \subsection{What and why}
 Cubie is an open-source Python project which performs numerical integration on consumer NVIDIA GPUs.
 Its goal is to put high-performance computing in the hands of everyday researchers and engineers.
-My research interest was in large-scale parameter studies for estimation of physiological parameters using a Bayesian approach. 
-This would have been a pointless toy if the simulation could not be completed faster than real-time, so I built Cubie to do it.
+My research called for simulations of cells under a range of possible conditions for a real-time application, 
+and it would have been a pointless toy if the simulation could not be completed faster than real-time, so I built Cubie to do it.
 
-\subsection{Why it's relevant}
-Numerical integration is inherently sequential, as each sample depends on the previous one.
-Cubie parallelises across parameter sets and initial conditions, running a full time-integration per thread.
-The workload can be memory- or compute-bound, depending on the user-supplied set of equations to solve.
-Occupancy is limited by registers for most non-toy problems, and performance in these kernels is memory-bound through spills.
-In no-spill kernels, performance is either limited by math-required control flow or floating point pipeline throughput.
+% \subsection{Why it's relevant}
+\textbf{My work on Cubie should tick every "you should bring" box in the invitation for this role.}
 
-Cubie kernels are JIT-compiled through
-\mbox{numba-cuda-mlir}, which allows dynamic optimisations based on a user's problem set.
-Cubie's source code is written in Python, but typing and use of CUDA primitives is explicit and carefully managed.
-Cubie ``goes fast'' due to the memory and iteration design of its algorithm implementations,
-and through careful operation scheduling, memory placement, and dynamic/heuristic optimisations.
+Numerical integration algorithms are large and sequential, as each sample depends on the last.
+Cubie runs a whole integration in one thread, as experimentation ruled out data-parallel approaches.
+Cubie's kernels can be memory- or compute-bound, depending on user-supplied equations to solve.
+With ``easy'' levers like coalescing memory accesses and memory tiling exhausted, performance
+was hard-fought against Nsight profiling tools.
 
-In my (draft, pending publishing) comparisons Cubie offers a 10,000$\times$ speedup over general-use programs like MATLAB and SciPy, and 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl.
-Building Cubie has taken me deep into the inner workings of NVIDIA GPUs, and gives me a strong backing in GPU kernel optimisation.
+In (draft, pending publishing) benchmark comparisons, Cubie is 10,000$\times$ faster than equivalent CPU implementations (SciPy, MATLAB), and 100x faster than other GPU implementations (DiffEqGPU.jl).
+If my kernel optimization skills are not at expert level across kernel design globally, I can at least confirm that they're at the top end of the domain-specific range! 
+
+Cubie needs to go fast, but it is primarily a tool for generating accurate numbers.
+Correctness needed verification at every internal stage, which required deliberate instrumentation to validate.
+
+I now use agentic AI to write almost every line of code.
+In this specialised code base, AI agents are usually wrong.
+My interaction with code is through PR reviews and agent sessions, where every line and behaviour needs to be questioned, scrutinized and validated.
 
 \switchcolumn
 \raggedright
