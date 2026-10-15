@@ -1,0 +1,80 @@
+% Build with: pdflatex "Chris Cameron - Anthology resume.tex"
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\hypersetup{pdftitle={Chris Cameron - Anthology resume},pdfauthor={Chris Cameron}}
+
+\definecolor{accent}{RGB}{30,60,110}
+\definecolor{muted}{RGB}{85,85,85}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\linespread{1.10}
+\hyphenpenalty=10000
+\emergencystretch=2em
+\raggedright
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{3pt}\titlerule]
+\titlespacing*{\section}{0pt}{16pt}{8pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=5pt,topsep=4pt,parsep=0pt}
+
+\begin{document}
+
+{\fontsize{28}{32}\selectfont\bfseries Chris Cameron\par}
+\vspace{2pt}
+\href{mailto:chrisjamescameron1@gmail.com}{chrisjamescameron1@gmail.com}
+\enspace$\cdot$\enspace
+\href{https://github.com/ccam80}{github.com/ccam80}
+
+\vspace{8pt}
+AI-native researcher, developer, and mechatronics engineer. PhD researcher
+in electrophysiology (completion expected early 2027) and creator of Cubie.
+Part-time lecturer in mechatronics engineering, including computer architecture, C programming,
+circuit design, and embedded systems.
+
+\section{Cubie --- GPU numerical integration}
+{\small\color{muted}\href{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}\par}
+I built Cubie, an open-source Python ODE solver for consumer NVIDIA GPUs, to support
+electrophysiology simulations for a real-time application. Current benchmarks
+(draft, unpublished) show \textbf{10,000$\times$ speedup}
+over CPU implementations (SciPy, MATLAB) and \textbf{100$\times$}
+over the nearest GPU competitor, DiffEqGPU.jl, on real-world problems.
+
+Once CUDA-shaped algorithms were in place and tiling and memory placement
+were addressed, further speedups were achieved by:
+
+\begin{itemize}
+  \item using NVIDIA profiling tools to trace bottlenecks and stalls
+    to individual instructions;
+  \item rolling/unrolling loops based on measured instruction counts against the instruction cache;
+  \item decreasing occupancy to reduce L2 cache misses (this one was surprising!);
+  \item ordering and fusing operations at a whole-kernel level to reduce live ranges and reduce spilling; and
+  \item placing buffers heuristically to trade off guaranteed-L1 shared memory
+    against possible-L2/VRAM local memory based on working set size.
+\end{itemize}
+
+Cubie goes fast, but it is a scientific tool. The codebase is complex and correctness is critical.
+To maintain correctness, I had to:
+
+\begin{itemize}
+  \item test numerical results against known references and custom CPU harnesses;
+  \item review every pull request line-by-line (AI agents are prolific but often incorrect); and
+  \item build approval processes including a ratcheting benchmark per PR and automated correctness checks.
+\end{itemize}
+
+\section{Open-source contributions}
+\textbf{numba-cuda / numba-cuda-mlir}\par
+Many merged and open pull requests address compiler performance, typing and
+lowering correctness, AST transforms, and kernel performance controls.
+
+\textbf{SymPy and lcapy} --- minor edits.
+
+\end{document}

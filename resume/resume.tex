@@ -1,83 +1,154 @@
-% Resume template. Build with: latexmk -pdf resume.tex
+% Build with: latexmk -pdf resume.tex
 \documentclass[10pt,a4paper]{article}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage[margin=1.8cm]{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
+\usepackage{paracol}
+\usepackage{microtype}
+
+\setlength{\columnsep}{0.9cm}
 
 \definecolor{accent}{RGB}{30,60,110}
+\definecolor{muted}{RGB}{100,100,100}
+\definecolor{sidebg}{RGB}{236,241,248}
+
+% Prefer looser spacing over hyphenating words.
+\hyphenpenalty=5000
+\tolerance=1000
+\emergencystretch=2em
 
 \pagestyle{empty}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parindent}{10pt}
+\setlength{\parskip}{2pt}
+\linespread{1.08}
 
-\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.6ex}\titlerule]
-\titlespacing*{\section}{0pt}{1.6ex}{1ex}
+\titleformat{\section}{\Large\bfseries\color{accent}\raggedright}{}{0pt}{}[\vspace{-0.4ex}\titlerule]
+\titlespacing*{\section}{0pt}{1ex}{1.2ex}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{2.2ex}{0.6ex}
 
-\setlist[itemize]{leftmargin=1.2em, itemsep=0.2ex, topsep=0.4ex, parsep=0pt}
+\setlist[itemize]{leftmargin=1.2em, itemsep=0.5ex, topsep=0pt, parsep=0pt}
 
-% \entry{Title}{Dates}{Organisation}{Location}
-\newcommand{\entry}[4]{%
-  \begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & #2 \\
-    \textit{#3} & \textit{#4}
-  \end{tabularx}\par}
+% Sidebar headings sit one level below \section.
+\newcommand{\sidehead}[1]{%
+  \par\vspace{1.8ex}{\large\bfseries\color{accent}#1\par}\vspace{0.4ex}}
+\newcommand{\sideitem}[1]{%
+  \par\vspace{1.2ex}{\bfseries #1\par}\vspace{0.3ex}}
 
-% \project{Name}{Link or tech stack}
-\newcommand{\project}[2]{%
-  \begin{tabularx}{\linewidth}{@{}X r@{}}
-    \textbf{#1} & \small #2
-  \end{tabularx}\par}
+% \repo{Name}{URL}{display URL}{description}
+\newcommand{\repo}[4]{%
+  \par\vspace{1.2ex}{\bfseries\href{#2}{#1}} -- #4\par
+  {\footnotesize\color{muted}\href{#2}{#3}\par}}
 
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Chris Cameron}\\[0.8ex]
+  {\Huge\bfseries Chris Cameron}\\[1.4ex]
   \href{mailto:chrisjamescameron1@gmail.com}{chrisjamescameron1@gmail.com}
   \enspace$\cdot$\enspace \href{https://github.com/ccam80}{github.com/ccam80}
-  \enspace$\cdot$\enspace Location
 \end{center}
 
+% \vspace{2ex}
+% {\small\itshape\color{muted} This is an AI-built 1-page resume put together
+% for this role; a full resume seems irrelevant since the invite relates to my
+% public open-source project.\par}
+
+% Pull the first headings up so the sidebar shading starts at the heading's top.
+\newlength{\colheadshift}
+\setlength{\colheadshift}{10pt}
+\vspace{\colheadshift}
+\columnratio{0.63}
+\backgroundcolor{c[1](10pt,0pt)}{sidebg}
+\begin{paracol}{2}
+\vspace*{-\colheadshift}
 \section{Summary}
-Two or three sentences on GPU kernel and inference optimisation experience.
+PhD student (finishing early 2027) and part-time lecturer. I had a previous
+life managing a group of bars and restaurants, completed an Engineering
+undergraduate degree, and have since worked some interesting internships and contract
+mechatronics projects. I teach undergraduate and postgraduate mechatronics engineering
+courses in computer architecture, introductory C programming, circuit analysis and design, and embedded systems.
+My research is in electrophysiology, simulating detailed cell
+models to identify autonomic nervous system parameters as an improvement to
+heart-rate variability measurements.
 
-\section{Experience}
-\entry{Role Title}{Mon YYYY -- Present}{Organisation}{City, Country}
+\section{Cubie}
+I will have shown up as a lead for this role due to my work on Cubie.
+\subsection{What and why}
+Cubie is an open-source Python project which performs numerical integration on consumer NVIDIA GPUs.
+Its goal is to put high-performance computing in the hands of everyday researchers and engineers.
+My research interest was in large-scale parameter studies for estimation of physiological parameters using a Bayesian approach. 
+This would have been a pointless toy if the simulation could not be completed faster than real-time, so I built Cubie to do it.
+
+\subsection{Why it's relevant}
+Numerical integration is inherently sequential, as each sample depends on the previous one.
+Cubie parallelises across parameter sets and initial conditions, running a full time-integration per thread.
+The workload can be memory- or compute-bound, depending on the user-supplied set of equations to solve.
+Occupancy is limited by registers for most non-toy problems, and performance in these kernels is memory-bound through spills.
+In no-spill kernels, performance is either limited by math-required control flow or floating point pipeline throughput.
+
+Cubie kernels are JIT-compiled through
+\mbox{numba-cuda-mlir}, which allows dynamic optimisations based on a user's problem set.
+Cubie's source code is written in Python, but typing and use of CUDA primitives is explicit and carefully managed.
+Cubie ``goes fast'' due to the memory and iteration design of its algorithm implementations,
+and through careful operation scheduling, memory placement, and dynamic/heuristic optimisations.
+
+In my (draft, pending publishing) comparisons Cubie offers a 10,000$\times$ speedup over general-use programs like MATLAB and SciPy, and 100$\times$ speedup over its nearest competitor, DiffEqGPU.jl.
+Building Cubie has taken me deep into the inner workings of NVIDIA GPUs, and gives me a strong backing in GPU kernel optimisation.
+
+\switchcolumn
+\raggedright
+\setlength{\parindent}{0pt}
+\vspace*{-\colheadshift}
+\section{Anthology Fit}
+
+\sidehead{Skills}
+\sideitem{Strong CUDA knowledge}
 \begin{itemize}
-  \item Achievement with a measured result (e.g.\ speed-up, throughput, latency).
-  \item Achievement with a measured result.
+  \item CUDA memory hierarchy.
+  \item Operator fusion.
+  \item NCU profiling. 
+  \item Bottleneck/stall identification.
 \end{itemize}
 
-\entry{Role Title}{Mon YYYY -- Mon YYYY}{Organisation}{City, Country}
+\sideitem{AI familiarity}
 \begin{itemize}
-  \item Achievement with a measured result.
+  \item AI-native in coding/research workflows.
+  \item Verification-tools-first habits from using agentic AI in
+        knowledge work.
+  \item Checking and scaffolding skills sharpened on previous-gen models
+        that badly needed it.
 \end{itemize}
 
-\section{Projects}
-\project{Project Name}{CUDA, Python}
+\vfill
+\sidehead{My Projects}
+\repo{Cubie}{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}{GPU-based ODE solver}
+\repo{GPUODEBenchmarks}{https://github.com/ccam80/GPUODEBenchmarks}{github.com/ccam80/GPUODEBenchmarks}{Performance benchmarks for GPU-based ODE solvers}
+\repo{deep\_zotero}{https://github.com/ccam80/deep-zotero}{github.com/ccam80/deep-zotero}{Local semantic search db for academic papers}
+
+\vfill
+\sidehead{Others' Projects (merged/open)}
+\sideitem{numba-cuda(-mlir)}
 \begin{itemize}
-  \item What it does and the result.
+  \item Compiler performance (6, 3)
+  \item Lowering/typing correctness (6, 3)
+  \item Kernel performance controls (0, 3)
+  \item AST transforms (1, 1)
+  \item Misc fixes (3, 2)
 \end{itemize}
-
-\section{Education}
-\entry{Degree, Field}{YYYY -- YYYY}{Institution}{City, Country}
-
-\section{Publications}
+\sideitem{sympy}
 \begin{itemize}
-  \item Authors. \textit{Title}. Venue, Year.
+  \item Minor printer edit (1, 0)
 \end{itemize}
-
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-  \textbf{GPU} & CUDA, Triton, profiling (Nsight Compute, Nsight Systems) \\
-  \textbf{Languages} & Python, C++ \\
-  \textbf{Tools} & Git, LaTeX
-\end{tabularx}
+\sideitem{lcapy}
+\begin{itemize}
+  \item Docs edits (1, 0)
+\end{itemize}
+\end{paracol}
 
 \end{document}
