@@ -35,38 +35,38 @@
 \href{https://github.com/ccam80}{github.com/ccam80}
 
 \vspace{8pt}
-AI-native researcher, developer, and mechatronics engineer. PhD researcher
-in electrophysiology (completion expected early 2027) and creator of Cubie.
+AI-native researcher, developer, and mechatronics engineer completing a PhD in biomedical engineering
+(completion early 2027), and creator of Cubie.
 Part-time lecturer in mechatronics engineering, including computer architecture, C programming,
 circuit design, and embedded systems.
 
-\section{Cubie --- GPU numerical integration}
+\section{Cubie: numerical integration on GPUs}
 {\small\color{muted}\href{https://github.com/cubiepy/cubie}{github.com/cubiepy/cubie}\par}
 I built Cubie, an open-source Python ODE solver for consumer NVIDIA GPUs, to support
 electrophysiology simulations for a real-time application. Current benchmarks
-(draft, unpublished) show \textbf{10,000$\times$ speedup}
+(draft, unpublished) show \textbf{a 10,000$\times$ speedup}
 over CPU implementations (SciPy, MATLAB) and \textbf{100$\times$}
 over the nearest GPU competitor, DiffEqGPU.jl, on real-world problems.
 
-Once CUDA-shaped algorithms were in place and tiling and memory placement
-were addressed, further speedups were achieved by:
+Creating CUDA-shaped algorithms, coalescing memory accesses, optimising memory placements and 
+extracting constants was not enough to get to domain-leading performance. Further speedups were gained by:
 
 \begin{itemize}
   \item using NVIDIA profiling tools to trace bottlenecks and stalls
     to individual instructions;
-  \item rolling/unrolling loops based on measured instruction counts against the instruction cache;
-  \item decreasing occupancy to reduce L2 cache misses (this one was surprising!);
-  \item ordering and fusing operations at a whole-kernel level to reduce live ranges and reduce spilling; and
+  \item rolling or unrolling loops by weighing loop-body instruction counts against instruction-cache size;
+  \item \emph{decreasing} occupancy to reduce L2 cache misses;
+  \item ordering and fusing operations at a whole-kernel level to shorten live ranges and reduce register spilling; and
   \item placing buffers heuristically to trade off guaranteed-L1 shared memory
-    against possible-L2/VRAM local memory based on working set size.
+    against possible-L2/VRAM local memory, based on working-set size.
 \end{itemize}
 
-Cubie goes fast, but it is a scientific tool. The codebase is complex and correctness is critical.
-To maintain correctness, I had to:
+Cubie goes fast, but it is a scientific tool. The codebase is complex, and correctness is critical.
+To achieve and maintain correctness, I had to:
 
 \begin{itemize}
   \item test numerical results against known references and custom CPU harnesses;
-  \item review every pull request line-by-line (AI agents are prolific but often incorrect); and
+  \item review every pull request line by line (AI agents are prolific but often incorrect); and
   \item build approval processes including a ratcheting benchmark per PR and automated correctness checks.
 \end{itemize}
 
@@ -75,6 +75,6 @@ To maintain correctness, I had to:
 Many merged and open pull requests address compiler performance, typing and
 lowering correctness, AST transforms, and kernel performance controls.
 
-\textbf{SymPy and lcapy} --- minor edits.
+\textbf{SymPy and Lcapy} --- minor edits.
 
 \end{document}
